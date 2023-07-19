@@ -1,14 +1,16 @@
 const express = require('express');
 const ejs = require('ejs');
-const path = require('path');
+const bodyParser = require('body-parser'); // body-parser modülünü import edin
 const app = express();
 const mongoose = require('mongoose');
-const Photos = require('./models/Photos')
+const Photos = require('./models/Photos');
 
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true })); // urlencoded işlemcisi
+app.use(bodyParser.json()); // json işlemcisi
 app.set('view engine', 'ejs');
-mongoose.connect('mongodb://localhost:27017/clean-blog',{
-  useNewUrlParser:true,
+mongoose.connect('mongodb://localhost:27017/clean-blog', {
+  useNewUrlParser: true,
   useUnifiedTopology: true
 });
 
@@ -21,8 +23,8 @@ app.get('/about', (req, res) => {
 });
 
 app.get('/index', async (req, res) => {
-  const blogs = await Photos.find({});
-  res.render('index',{blogs});
+  const bloger = await Photos.find({});
+  res.render('index',{bloger});
 });
 
 app.get('/contact', (req, res) => {
@@ -33,11 +35,12 @@ app.get('/add_post', (req, res) => {
 });
 
 app.post('/blogs',async (req,res)=>{
+  console.log(req.body);
   await Photos.create(req.body);
   res.redirect('/index')
-})
+});
 
-const port = 3000;
+const port = 3004;
 app.listen(port, () => {
   console.log(`server ${port} çalışıyor`);
 });
