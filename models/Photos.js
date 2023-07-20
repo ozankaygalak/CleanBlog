@@ -11,6 +11,7 @@ const BlogSchema = new Schema({
   },
 });
 console.log(BlogSchema.title);
+console.log(BlogSchema.detail);
 const Photos = mongoose.model('Photos', BlogSchema);
 
 module.exports = Photos;

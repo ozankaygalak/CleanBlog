@@ -1,13 +1,11 @@
 const express = require('express');
 const ejs = require('ejs');
-const bodyParser = require('body-parser'); // body-parser modülünü import edin
 const app = express();
 const mongoose = require('mongoose');
 const Photos = require('./models/Photos');
-
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true })); // urlencoded işlemcisi
-app.use(bodyParser.json()); // json işlemcisi
+app.use(express.urlencoded({ extended: true })); // urlencoded işlemcisi
+app.use(express.json()); // json işlemcisi
 app.set('view engine', 'ejs');
 mongoose.connect('mongodb://localhost:27017/clean-blog', {
   useNewUrlParser: true,
@@ -35,7 +33,6 @@ app.get('/add_post', (req, res) => {
 });
 
 app.post('/blogs',async (req,res)=>{
-  console.log(req.body);
   await Photos.create(req.body);
   res.redirect('/index')
 });
