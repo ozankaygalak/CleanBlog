@@ -10,8 +10,7 @@ const BlogSchema = new Schema({
     default: Date.now,
   },
 });
-console.log(BlogSchema.title);
-console.log(BlogSchema.detail);
+
 const Photos = mongoose.model('Photos', BlogSchema);
 
 module.exports = Photos;
