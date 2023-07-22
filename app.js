@@ -4,8 +4,10 @@ const app = express();
 const mongoose = require('mongoose');
 const Photos = require('./models/Photos.js');
 app.use(express.static('public'));
+const fileUpload = require('express-fileupload');
 app.use(express.urlencoded({ extended: true })); // urlencoded işlemcisi
 app.use(express.json()); // json işlemcisi
+app.use(fileUpload());
 app.set('view engine', 'ejs');
 mongoose.connect('mongodb://localhost:27017/clean-blog', {
   useNewUrlParser: true,
