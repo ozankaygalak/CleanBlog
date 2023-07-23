@@ -26,6 +26,7 @@
         <div class="post-preview">
           <% for(let i = 0; i<photos.length;i++) { %>
           <a href=" /photos/<%= photos[i]._id %> ">
+            <img class="col-lg-8 " src="<%= photos[i].photo   %>">
             <h2 class="post-title">
               <%= photos[i].title   %>
             </h2>
