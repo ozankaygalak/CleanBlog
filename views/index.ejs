@@ -36,7 +36,9 @@
           </a>
           <p class="post-meta">Posted by
             <a href="#">Start Bootstrap</a>
-            on <% photos[i].dateCreated.default  %></p>
+            on <%= photos[i].dateCreated.toLocaleDateString() %>
+          </p>
+          
             <% } %>
         </div>
         <hr>
